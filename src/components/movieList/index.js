@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { movieService } from "services/movieService";
 import Movie from "./movie";
-import { MovieListWrapper } from "./style";
+import { MoviePageWrapper } from "./style";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Container, LinearProgress } from "@mui/material";
+import { Container, Grid, LinearProgress } from "@mui/material";
 
 const MovieList = () => {
   const [offset, setOffset] = useState(0);
@@ -60,6 +60,7 @@ const MovieList = () => {
     if (resp.success) {
       getReactions();
       reloadMovie(movies.indexOf(movie));
+      toast.success(resp.data.message);
     } else {
       toast.error(resp.error.message);
     }
@@ -70,6 +71,7 @@ const MovieList = () => {
     if (resp.success) {
       getReactions();
       reloadMovie(movies.indexOf(movie));
+      toast.success(resp.data.message);
     } else {
       toast.error(resp.error.message);
     }
@@ -90,8 +92,8 @@ const MovieList = () => {
   const checkDisliked = movileId => reactions.dislikeds.includes(movileId);
 
   return (
-    <>
-      <Header />
+    <MoviePageWrapper>
+      {user && <Header user={user} />}
 
       <Container>
         <InfiniteScroll
@@ -104,21 +106,22 @@ const MovieList = () => {
             </div>
           }
         >
-          <MovieListWrapper>
+          <Grid container spacing={2}>
             {movies.map(m => (
-              <Movie
-                key={m.id}
-                {...m}
-                liked={checkLiked(m.id)}
-                onLike={() => onLike(m)}
-                disliked={checkDisliked(m.id)}
-                onDislike={() => onDislike(m)}
-              />
+              <Grid key={m.id} item xs={12} sm={6} md={4}>
+                <Movie
+                  {...m}
+                  liked={checkLiked(m.id)}
+                  onLike={() => onLike(m)}
+                  disliked={checkDisliked(m.id)}
+                  onDislike={() => onDislike(m)}
+                />
+              </Grid>
             ))}
-          </MovieListWrapper>
+          </Grid>
         </InfiniteScroll>
       </Container>
-    </>
+    </MoviePageWrapper>
   );
 };
 

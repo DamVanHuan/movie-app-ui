@@ -3,7 +3,7 @@ export const Constant = {
     token: "token",
     user: "user"
   },
-  paging: { limit: 5 },
+  paging: { limit: 10 },
   size: {
     sm: 576,
     md: 768
