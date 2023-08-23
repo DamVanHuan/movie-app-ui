@@ -12,5 +12,8 @@ export const Constant = {
     login: "/login",
     register: "/register",
     movieList: "/movies"
+  },
+  pattern: {
+    email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
   }
 };

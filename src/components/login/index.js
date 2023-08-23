@@ -21,9 +21,17 @@ const Login = () => {
     const err = { ...errors };
     if (input.username.length === 0) {
       success = false;
-      err.username = "Username is required";
+      err.username = "Username/Email is required";
     } else {
-      err.username = "";
+      if (
+        input.username.includes("@") &&
+        !Constant.pattern.email.test(input.username)
+      ) {
+        err.username = "Invalid email";
+        success = false;
+      } else {
+        err.username = "";
+      }
     }
 
     if (input.password.length === 0) {
@@ -63,7 +71,7 @@ const Login = () => {
       </Typography>
       <TextField
         id="username"
-        label="Username"
+        label="Username/Email"
         value={input.username}
         onChange={e => setInput({ ...input, username: e.target.value })}
         error={!!errors.username}
@@ -89,7 +97,7 @@ const Login = () => {
       </ButtonWrapper>
 
       <ButtonWrapper>
-        <a href="#">Signin by Google</a>
+        <a href="#">Sign in by Google</a>
         <span>or</span>
         <a href="#">Sign in by Facebook</a>
       </ButtonWrapper>
