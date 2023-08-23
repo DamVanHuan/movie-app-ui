@@ -58,7 +58,7 @@ export const publicApi = async (path, method = "get", body = null) => {
 
 export const privateApi = async (path, method, body = null) => {
   const headers = { "Content-Type": "application/json" };
-  const token = localStorage.getCache(Constant.storageKey.token);
+  const token = localStorage.getItem(Constant.storageKey.token);
   headers["Authorization"] = `Bearer ${token}`;
 
   return await callApi(path, method, headers, body);

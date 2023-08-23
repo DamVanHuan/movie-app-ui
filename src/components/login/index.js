@@ -1,8 +1,8 @@
 import { TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { userService } from "../../services/userService";
+import { userService } from "services/userService";
 import { toast } from "react-toastify";
-import { Constant } from "../../consts/constant";
+import { Constant } from "consts/constant";
 import { Link } from "react-router-dom";
 import { ButtonWrapper, FormWrapper } from "./style";
 import LoadingButton from "@mui/lab/LoadingButton";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { userService } from "../../services/userService";
-import { Constant } from "../../consts/constant";
+import { userService } from "services/userService";
+import { Constant } from "consts/constant";
 import { ButtonWrapper, FormWrapper } from "./style";
 import { TextField, Typography } from "@mui/material";
 import { toast } from "react-toastify";
