@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "react-toastify/dist/ReactToastify.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Login from "./components/login";
+import MovieList from "./components/movieList";
+import Register from "./components/register";
+import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import { Constant } from "./consts/constant";
+
+const router = createBrowserRouter([
+  { path: "/", element: <MovieList /> },
+  { path: Constant.page.login, element: <Login /> },
+  { path: Constant.page.register, element: <Register /> }
+]);
 
 function App() {
+  useEffect(() => {
+    // Redirect to login if page is not login or register.
+    const pathname = window.location.pathname;
+    if (
+      !pathname.includes(Constant.page.login) &&
+      !pathname.includes(Constant.page.register)
+    ) {
+      const user = JSON.parse(localStorage.getItem(Constant.storageKey.user));
+      if (!user) {
+        window.location.replace("/login");
+      }
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </>
   );
 }
 
