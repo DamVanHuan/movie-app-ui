@@ -1,0 +1,8 @@
+name: movie-app
+services:
+  movie-app:
+    image: dvhuan1803/movie-app:latest
+    container_name: movie-app
+    ports:
+      - 3002:80
+    restart: always
