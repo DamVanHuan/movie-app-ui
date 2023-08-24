@@ -96,15 +96,13 @@ const MovieList = () => {
       {user && <Header user={user} />}
 
       <Container>
+        {loading && <LinearProgress sx={{ mt: 1, mb: 1 }} />}
+
         <InfiniteScroll
           dataLength={movies.length}
           hasMore={hasNext}
           next={getMovies}
-          loader={
-            <div style={{ margin: "8px 0" }}>
-              <LinearProgress />
-            </div>
-          }
+          loader={<LinearProgress sx={{ mt: 1, mb: 1 }} />}
         >
           <Grid container spacing={2}>
             {movies.map(m => (
